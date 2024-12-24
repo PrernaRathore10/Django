@@ -48,6 +48,11 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ![screenshot](Images/Screenshot%202024-12-24%20134542.jpg)
 
 ---
+## Levels of Django
+
+![screenshot](Images/Screenshot%202024-12-24%20154859.jpg)
+
+---
 
 ## Starting a New Django Project
 
