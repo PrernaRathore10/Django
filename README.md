@@ -16,7 +16,7 @@ Commands for creating virtual environments:
 * Use `python -m venv <env_name>` or tools like `venv`, `pip`, and `pipx`.
 * Activation:
   * On Mac/Linux: `source <env_name>/bin/activate`
-  * On Windows: `<env_name>\Scripts\activate`
+  * On Windows: `source <env_name>\Scripts\activate`
 
 **Installation Process** :
 
