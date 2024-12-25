@@ -28,12 +28,13 @@
 This helps ensure your project’s dependencies are easily shared and installed across environments.
 
 1. *Creating:*
+
    - Generate: `pip freeze > requirements.txt`
-
 2. *Updating:*
-   - After installing new packages, update: `pip freeze > requirements.txt`
 
+   - After installing new packages, update: `pip freeze > requirements.txt`
 3. *Installing:*
+
    - To install all dependencies from `requirements.txt`: `pip install -r requirements.txt`
 
 **Advantages of Django** :
@@ -43,11 +44,13 @@ This helps ensure your project’s dependencies are easily shared and installed 
 * Secure by default, protecting against common vulnerabilities.
 
 ---
+
 ## Flow of request
 
 ![screenshot](Images/Screenshot%202024-12-24%20134542.jpg)
 
 ---
+
 ## Levels of Django
 
 ![screenshot](Images/Screenshot%202024-12-24%20154859.jpg)
@@ -82,6 +85,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ---
 
 ## **1. `urls.py`**
+
 - Maps URLs to their respective views.
 - Contains `urlpatterns` list, which routes user requests.
 - Use `path()` or `re_path()` for routing:
@@ -104,6 +108,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ---
 
 ## **2. `views.py`**
+
 - Contains Python functions/classes that handle requests and return responses.
 - Common types of views:
   - **Function-based views (FBV):**
@@ -133,6 +138,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ---
 
 ## **3. Templates**
+
 - HTML files used to render data dynamically.
 - Stored in the `templates/` folder within apps or at the project level.
 - Use Django Template Language (DTL) for dynamic content:
@@ -152,6 +158,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ---
 
 ## **4. Static Files**
+
 - Includes CSS, JS, images, etc.
 - Stored in the `static/` folder within apps or at the project level.
 - Define static files in `settings.py`:
@@ -167,6 +174,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 ---
 
 ## **5. Important Settings**
+
 - **Base Directory**:
   ```python
   import os
@@ -196,3 +204,100 @@ This helps ensure your project’s dependencies are easily shared and installed 
   MEDIA_ROOT = BASE_DIR / 'media'
   ```
 
+
+# **Jinja2 Short Notes**
+
+## **Overview:**
+- Jinja2 is a templating engine used in web frameworks like Django and Flask.
+- It enables dynamic generation of HTML with template tags, filters, and expressions.
+
+## **Key Features:**
+
+### **Template Tags:**
+- `{% ... %}`: For logic (loops, conditions).
+- **Example:**  
+  ```django
+  {% for item in items %} {{ item }} {% endfor %}
+  ```
+
+### **Template Variables:**
+- `{{ ... }}`: For inserting dynamic data.
+- **Example:**  
+  ```django
+  {{ user.name }}
+  ```
+
+### **Filters:**
+- Modify data within templates.
+- **Example:**  
+  ```django
+  {{ name|capitalize }}
+  ```
+
+### **Control Structures:**
+- **Conditional Statements:**  
+  ```django
+  {% if user.is_authenticated %} 
+      Welcome, {{ user.name }} 
+  {% else %} 
+      Please log in 
+  {% endif %}
+  ```
+- **Loops:**  
+  ```django
+  {% for post in posts %} 
+      {{ post.title }} 
+  {% endfor %}
+  ```
+
+### **Includes and Extends:**
+- **Reusable Templates:**  
+  ```django
+  {% include 'header.html' %}
+  ```
+- **Template Inheritance:**  
+  ```django
+  {% extends 'base.html' %}
+  {% block content %}
+      Your content here.
+  {% endblock %}
+  ```
+
+---
+
+# **Django Apps Short Notes**
+
+## **What are Django Apps?**
+- Modular components of a Django project, designed to handle specific functionalities (e.g., blog, user authentication).
+- Each app can be reused across projects.
+
+## **Structure of an App:**
+1. **models.py**: Define database models.  
+2. **views.py**: Handle request/response logic.  
+3. **urls.py**: Map URLs to views.  
+4. **admin.py**: Configure admin panel for the app.  
+5. **apps.py**: App configuration (metadata).  
+6. **migrations/**: Database migration files.
+
+## **Creating an App:**
+```bash
+python manage.py startapp app_name
+```
+
+## **Registering an App:**
+- Add app name in `INSTALLED_APPS` inside `settings.py`:  
+  ```python
+  INSTALLED_APPS = [
+      'app_name',
+  ]
+  ```
+
+## **Key Commands for Apps:**
+- **Run Migrations:**  
+  ```bash
+  python manage.py migrate
+  ```
+- **Make Migrations:**  
+  ```bash
+  python manage.py makemigrations
+  ```
