@@ -1,3 +1,12 @@
+# Django Notes
+
+## Table of Contents
+- [Models](./notes/model.md)
+- [URLs](./notes/urls.md)
+- [Views](./notes/views.py)
+- [Forms](./notes/forms.md)
+- [Admin](./notes/admin.md)
+
 # Django
 
 ## How to start project ?
@@ -23,7 +32,7 @@
 * Install Django using `pip install django`.
 * Use `pip` commands within the virtual environment to ensure proper package management.
 
-### Creating, Updating, and Installing `requirements.txt` File
+### `requirements.txt` File
 
 This helps ensure your project’s dependencies are easily shared and installed across environments.
 
@@ -45,13 +54,13 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## Flow of request
+### Flow of request
 
 ![screenshot](Images/Screenshot%202024-12-24%20134542.jpg)
 
 ---
 
-## Levels of Django
+### Levels of Django
 
 ![screenshot](Images/Screenshot%202024-12-24%20154859.jpg)
 
@@ -72,19 +81,11 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## Additional Commands
-
-1. Migrate DB: `python manage.py migrate`
-2. Create superuser: `python manage.py createsuperuser`
-3. Run tests: `python manage.py test`
+# Django Essentials
 
 ---
 
-# **Django Essentials**
-
----
-
-## **1. `urls.py`**
+### 1. `urls.py`
 
 - Maps URLs to their respective views.
 - Contains `urlpatterns` list, which routes user requests.
@@ -97,6 +98,10 @@ This helps ensure your project’s dependencies are easily shared and installed 
       path('', views.home, name='home'),
   ]
   ```
+- **Dynamic URL Patterns**
+  - Capture values from URLs using angle brackets (<>).
+    - Example: path('post/<int:id>/', views.post_detail, name='post_detail')
+    - int:id captures an integer value from the URL and passes it to the post_detail view as a keyword argument.
 - Important: Include app-level URLs in project-level `urls.py`:
   ```python
   from django.urls import include
@@ -107,7 +112,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## **2. `views.py`**
+### 2. `views.py`
 
 - Contains Python functions/classes that handle requests and return responses.
 - Common types of views:
@@ -137,7 +142,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## **3. Templates**
+### 3. Templates
 
 - HTML files used to render data dynamically.
 - Stored in the `templates/` folder within apps or at the project level.
@@ -157,7 +162,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## **4. Static Files**
+### 4. Static Files
 
 - Includes CSS, JS, images, etc.
 - Stored in the `static/` folder within apps or at the project level.
@@ -173,7 +178,7 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-## **5. Important Settings**
+### 5. Important Settings
 
 - **Base Directory**:
   ```python
@@ -205,13 +210,13 @@ This helps ensure your project’s dependencies are easily shared and installed 
   ```
 
 
-# **Jinja2 Short Notes**
+# **Jinja2**
 
-## **Overview:**
+## Overview:
 - Jinja2 is a templating engine used in web frameworks like Django and Flask.
 - It enables dynamic generation of HTML with template tags, filters, and expressions.
 
-## **Key Features:**
+## Key Features:
 
 ### **Template Tags:**
 - `{% ... %}`: For logic (loops, conditions).
@@ -265,13 +270,13 @@ This helps ensure your project’s dependencies are easily shared and installed 
 
 ---
 
-# **Django Apps Short Notes**
+# **Django Apps**
 
-## **What are Django Apps?**
+### **What are Django Apps?**
 - Modular components of a Django project, designed to handle specific functionalities (e.g., blog, user authentication).
 - Each app can be reused across projects.
 
-## **Structure of an App:**
+### **Structure of an App:**
 1. **models.py**: Define database models.  
 2. **views.py**: Handle request/response logic.  
 3. **urls.py**: Map URLs to views.  
@@ -279,12 +284,12 @@ This helps ensure your project’s dependencies are easily shared and installed 
 5. **apps.py**: App configuration (metadata).  
 6. **migrations/**: Database migration files.
 
-## **Creating an App:**
+### **Creating an App:**
 ```bash
 python manage.py startapp app_name
 ```
 
-## **Registering an App:**
+### **Registering an App:**
 - Add app name in `INSTALLED_APPS` inside `settings.py`:  
   ```python
   INSTALLED_APPS = [
@@ -292,12 +297,111 @@ python manage.py startapp app_name
   ]
   ```
 
-## **Key Commands for Apps:**
-- **Run Migrations:**  
-  ```bash
-  python manage.py migrate
-  ```
+### **Key Commands for Apps:**
 - **Make Migrations:**  
+  - Generates migration files based on changes made to your models (models.py).
   ```bash
   python manage.py makemigrations
   ```
+- **Run Migrations:**  
+  - Applies the migration files to the database.
+  - Updates the database schema to reflect the changes defined in the migrations.
+  ```bash
+  python manage.py migrate
+  ```
+- **When to Use?**
+  - After Modifying Models:
+    - Run makemigrations to create migration files.
+    - Then, run migrate to apply these changes.
+  - On a Fresh Setup:
+    - If you clone a project with existing migrations, only migrate is needed to set up the database.
+
+---
+## **Adding Tailwind with Reload and Managing Superuser in Django (Windows, Python venv)**
+
+
+### **1. Adding Tailwind in Windows (Python venv)**
+
+#### Steps to Add Tailwind:
+1. **Install Tailwind Package**:  
+   ```bash
+   pip install django-tailwind
+   ```
+
+2. **Create a Tailwind App**:  
+   ```bash
+   python manage.py tailwind init <tailwindapp_name/none=default>
+   ```
+
+3. **Install Node.js and npm**:  
+   - [Download Node.js](https://nodejs.org) and ensure it's added to your system PATH.  
+   - Verify Installation:  
+     ```bash
+     node -v
+     npm -v
+     ```
+
+4. **Install Tailwind Dependencies**:  
+   ```bash
+   python manage.py tailwind install
+   ```
+
+5. **Configure `settings.py`**: 
+   Add `tailwind` and the app name (`<tailwindapp_name>`) to `INSTALLED_APPS`.
+
+6. **Start Tailwind in Watch Mode**:  
+   ```bash
+   python manage.py tailwind start
+   ```
+
+---
+
+### **2. Adding Tailwind Reload**
+
+#### Steps to Enable Browser Reload with Tailwind:
+1. **Install Django Browser Reload**:  
+   ```bash
+   pip install django-browser-reload
+   ```
+
+2. **Configure `settings.py`**:  
+   Add `'django_browser_reload'` to `INSTALLED_APPS`.
+   Add `'django_browser_reload.middleware.BrowserReloadMiddleware'` to `MIDDLEWARE`.
+
+3. **Update `urls.py`**:  
+   Add the browser reload URL pattern:  
+   ```python
+   urlpatterns += [path("__reload__/", include("django_browser_reload.urls"))]
+   ```
+
+4. **Update HTML Templates**:  
+   Add the reload script inside the `<head>` tag:  
+   ```html
+   <script src="http://127.0.0.1:8000/__reload__/reload.js"></script>
+   ```
+
+5. **Run the Server**:  
+   ```bash
+   python manage.py runserver
+   ```
+
+---
+
+## **Superuser Management**
+
+#### Create a Superuser:  
+- Command:  
+  ```bash
+  python manage.py createsuperuser
+  ```  
+- Enter details (username, email, and password).
+
+#### Change Superuser Password:  
+- Command:  
+  ```bash
+  python manage.py changepassword <username>
+  ```  
+- Follow the prompts to reset the password.
+
+---
+
