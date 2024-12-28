@@ -3,7 +3,7 @@
 ## Table of Contents
 - [Models](./notes/model.md)
 - [URLs](./notes/urls.md)
-- [Views](./notes/views.py)
+- [Views](./notes/views.md)
 - [Forms](./notes/forms.md)
 - [Admin](./notes/admin.md)
 
@@ -100,8 +100,8 @@ This helps ensure your project’s dependencies are easily shared and installed 
   ```
 - **Dynamic URL Patterns**
   - Capture values from URLs using angle brackets (<>).
-    - Example: path('post/<int:id>/', views.post_detail, name='post_detail')
-    - int:id captures an integer value from the URL and passes it to the post_detail view as a keyword argument.
+    - Example: `path('post/<int:id>/', views.post_detail, name='post_detail')`
+    - <int:id> captures an integer value from the URL and passes it to the post_detail view as a keyword argument.
 - Important: Include app-level URLs in project-level `urls.py`:
   ```python
   from django.urls import include
